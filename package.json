@@ -1,0 +1,66 @@
+{
+  "name": "tree-sitter-gosu-template",
+  "version": "0.1.0",
+  "description": "Tree-sitter parser for Gosu Templates",
+  "main": "bindings/node",
+  "types": "bindings/node",
+  "scripts": {
+    "install": "node-gyp-build",
+    "prestart": "tree-sitter build --wasm",
+    "start": "tree-sitter playground",
+    "generate-corpus": "ts-node scripts/generate_bulk_corpus.ts ./gsrc test/corpus/bulk_generated.txt",
+    "test": "tree-sitter test",
+    "compile-grammar": "tsc grammar.ts",
+    "generate": "npm run compile-grammar && tree-sitter generate",
+    "build": "node-gyp rebuild",
+    "analyze": "ts-node scripts/analyze_failures.ts",
+    "verify": "ts-node scripts/verify_file.ts"
+  },
+  "keywords": [
+    "incremental",
+    "parsing",
+    "tree-sitter",
+    "gosu",
+    "template"
+  ],
+  "files": [
+    "grammar.js",
+    "tree-sitter.json",
+    "binding.gyp",
+    "prebuilds/**",
+    "bindings/node/*",
+    "queries/*",
+    "src/**",
+    "*.wasm"
+  ],
+  "dependencies": {
+    "node-addon-api": "^8.5.0",
+    "node-gyp-build": "^4.8.4"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "prebuildify": "^6.0.1",
+    "tree-sitter": "^0.25.0",
+    "tree-sitter-cli": "^0.25.10",
+    "tree-sitter-gosu": "github:ashan/tree-sitter-gosu#main",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "peerDependencies": {
+    "tree-sitter": ">=0.21.0"
+  },
+  "peerDependenciesMeta": {
+    "tree-sitter": {
+      "optional": true
+    }
+  },
+  "tree-sitter": [
+    {
+      "scope": "source.gosu.template",
+      "file-types": [
+        "gst"
+      ],
+      "injection-regex": "^gosu_template$"
+    }
+  ]
+}

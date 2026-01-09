@@ -1,0 +1,6 @@
+node_modules/
+build/
+.DS_Store
+analysis_report.json
+test/corpus/bulk_generated.txt
+.npm/

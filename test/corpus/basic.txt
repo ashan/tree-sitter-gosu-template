@@ -1,0 +1,51 @@
+==================
+Basic Content
+==================
+<root>
+Hello World
+</root>
+---
+(template
+  (content))
+
+==================
+Directives
+==================
+<%@ params(x: String) %>
+<%@ extends gw.Base %>
+---
+(template
+  (directive
+    (parameter_list))
+  (content)
+  (directive
+    (type_reference)))
+
+==================
+Scriptlets
+==================
+<% var x = 1 %>
+---
+(template
+  (scriptlet
+    (scriptlet_content)))
+
+==================
+Expressions
+==================
+<%= x + 1 %>
+---
+(template
+  (expression
+    (expression_content)))
+
+==================
+Interpolation
+==================
+<div name="${name}">
+---
+(template
+  (content)
+  (interpolation
+    (interpolation_content))
+  (content))
