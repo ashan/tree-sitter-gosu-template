@@ -6,6 +6,7 @@
   "types": "bindings/node",
   "scripts": {
     "install": "node-gyp-build",
+    "prepare": "npm run compile-grammar && tree-sitter generate",
     "prestart": "tree-sitter build --wasm",
     "start": "tree-sitter playground",
     "generate-corpus": "ts-node scripts/generate_bulk_corpus.ts ./gsrc test/corpus/bulk_generated.txt",
@@ -24,6 +25,7 @@
     "template"
   ],
   "files": [
+    "grammar.ts",
     "grammar.js",
     "tree-sitter.json",
     "binding.gyp",
