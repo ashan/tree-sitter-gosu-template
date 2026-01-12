@@ -39,9 +39,9 @@ graph TB
     end
     
     subgraph "Content Classification"
-        DIR[Directives<br/><%@ ... %>]
-        SCRIPT[Scriptlets<br/><% ... %>]
-        EXPR[Expressions<br/><%= ... %>]
+        DIR[Directives<br/>params, extends]
+        SCRIPT[Scriptlets<br/>Code blocks]
+        EXPR[Expressions<br/>Output expressions]
         TEXT[Template Text<br/>HTML/Static]
     end
     
