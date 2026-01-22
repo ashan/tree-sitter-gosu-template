@@ -488,15 +488,11 @@ npm run analyze ./test-templates
 
 We need builds for **Linux** and **Windows**:
 
-```bash
-git clone https://github.com/ashan/tree-sitter-gosu-template.git
-cd tree-sitter-gosu-template
-npm install
-npx prebuildify --napi --strip
-git add -f prebuilds/
-git commit -m "chore: add prebuilds for [platform]"
-git push
-```
+We use GitHub Actions to automatically generate prebuilds for Linux, macOS, and Windows.
+To trigger a new build, simply push to the `main` branch. The workflow will:
+1. Build for all platforms
+2. Commit the prebuilds to the `prebuilds/` directory
+3. Push the changes back to the repository
 
 ---
 
