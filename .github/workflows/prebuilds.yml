@@ -65,7 +65,7 @@ jobs:
       - name: Merge prebuilds
         run: |
           mkdir -p prebuilds
-          cp -r prebuilds-temp/*/* prebuilds/ || true
+          cp -r prebuilds-temp/* prebuilds/ || true
           ls -la prebuilds/
 
       - name: Commit prebuilds
@@ -73,5 +73,5 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add prebuilds/
-          git commit -m "chore: update prebuilds" || echo "No changes"
+          git commit -m "chore: update prebuilds [skip ci]" || echo "No changes"
           git push
