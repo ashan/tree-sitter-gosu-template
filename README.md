@@ -180,7 +180,7 @@ All Gosu features are supported inside template tags:
 ### Prerequisites
 
 - Node.js 18+ (Node 20 or 22 LTS recommended)
-- Build tools for native compilation
+- **Build Tools**: **Optional** (Prebuilds included). Required only for custom builds.
 - `tree-sitter-gosu` (automatic via dependencies)
 
 **macOS:**
