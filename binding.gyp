@@ -7,7 +7,7 @@
       ],
       "include_dirs": [
         "src",
-        "node_modules/tree-sitter/vendor/tree-sitter/lib/include",
+        "src",
       ],
       "sources": [
         "bindings/node/binding.cc",

@@ -42,7 +42,7 @@
   "devDependencies": {
     "@types/node": "^22.10.5",
     "prebuildify": "^6.0.1",
-    "tree-sitter": "github:ashan/tree-sitter-prebuilt",
+    "tree-sitter": "^0.25.0",
     "tree-sitter-cli": "^0.25.10",
     "tree-sitter-gosu": "github:ashan/tree-sitter-gosu#main",
     "ts-node": "^10.9.2",
