@@ -1,0 +1,77 @@
+name: Build Prebuilds
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            arch: x64
+          - os: macos-latest
+            arch: arm64
+          - os: macos-13
+            arch: x64
+          - os: windows-latest
+            arch: x64
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 25
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build prebuilds
+        run: npm run generate && npx prebuildify --napi --strip
+
+      - name: Upload prebuilds
+        uses: actions/upload-artifact@v4
+        with:
+          name: prebuilds-${{ matrix.os }}-${{ matrix.arch }}
+          path: prebuilds/
+          retention-days: 30
+
+  publish-prebuilds:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: prebuilds-temp
+          pattern: prebuilds-*
+          merge-multiple: true
+
+      - name: Merge prebuilds
+        run: |
+          mkdir -p prebuilds
+          cp -r prebuilds-temp/*/* prebuilds/ || true
+          ls -la prebuilds/
+
+      - name: Commit prebuilds
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add prebuilds/
+          git commit -m "chore: update prebuilds" || echo "No changes"
+          git push
